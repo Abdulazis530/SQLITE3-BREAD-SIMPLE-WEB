@@ -1,0 +1,142 @@
+<%- include('header'); -%>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"> Bread. </a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Browse </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Read</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Edit</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Delete</a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="filter">
+    <h2>Filter</h2>
+<form action="/edit" method="POST">
+    <div class="container forms">
+      <!-- start of id -->
+      <div class="row">
+        <div class="col-sm-2">
+         
+          <label for="id" class="col-sm-2 col-form-label">ID</label>
+        </div>
+        <div class="col-sm-10">
+          <input
+            readonly
+            
+            type="text"
+            class="readonly form-control bg-dark"
+            id="id"
+            placeholder=<%=bread_id %>
+           
+            
+          />
+        </div>
+      </div>
+
+      <!-- start of string -->
+      <div class="row">
+        <div class="col-sm-2">
+          
+          <label for="string" class="col-sm-2 col-form-label">String</label>
+        </div>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="string"
+            name="string"
+            placeholder=<%= string %>
+           
+            autocomplete="off"
+          />
+        </div>
+      </div>
+      <!-- start of integer -->
+      <div class="row">
+        <div class="col-sm-2">
+          
+          <label for="integer" class="col-sm-2 col-form-label"
+            >Integer</label
+          >
+        </div>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="integer"
+            name="intData"
+            autocomplete="off"
+            placeholder=<%= intData %>
+          />
+        </div>
+      </div>
+      <!-- start of float -->
+      <div class="row">
+        <div class="col-sm-2">
+        
+          <label for="float" class="col-sm-2 col-form-label">Float</label>
+        </div>
+        <div class="col-sm-10">
+          <input
+            type="text"
+            class="form-control"
+            id="float"
+            name="floatType"
+            autocomplete="off"
+            placeholder=<%= floatType %>
+            
+          />
+        </div>
+      </div>
+      <!-- start of date -->
+      <div class="row">
+        <div class="col-sm-2">
+         
+          <label for="date" class="col-sm-2 col-form-label">Date</label>
+        </div>
+        <div class="col-sm-4">
+          <input
+            type="date"
+            class="form-control"
+            id="date"
+            name="tanggal"
+            autocomplete="off"
+            placeholder=<%= tanggal %>
+
+          />
+          <h6 class="form-text">
+            to
+          </h6>
+        </div>
+      </div>
+      
+
+      <!-- start of bolean -->
+      <div class="row">
+        <div class="col-sm-2">
+          
+          <label for="float" class="col-sm-2 col-form-label">Boolean</label>
+        </div>
+        <div class="col-sm-10">
+          <select name="bool"  class="custom-select mr-sm-2" id="bolean">
+            <option   selected><p class="op-selected"><%= bool %> </p></option>
+            <option   value="true"><p class="op-selected">True</p></option>
+            <option   value="false"><p  class="op-selected">False</p></option>
+          </select>
+        </div>
+      </div>
+
+      <!-- end of container -->
+    </div>
+    <button type="submit" name="bread_id" value="<%=bread_id%> " class="btn-input btn btn-info">Submit</button>
+  </form>
+  </section>
+<%- include('footer'); -%>

@@ -1,0 +1,258 @@
+<%- include('header'); -%>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"> Bread. </a>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Browse </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Read</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Edit</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Add</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Delete</a>
+        </li>
+      </ul>
+    </nav>
+ 
+    <section class="filter">
+      <h2>Filter</h2>
+
+      <form action="/" method="GET">
+        <div class="container">
+        <div class=" forms">
+          <!-- start of id -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxId"/>
+              <label for="id" class="col-sm-2 col-form-label">ID</label>
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="id"
+                name="id"
+                placeholder="ID"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+
+          <!-- start of string -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxString"/>
+              <label for="string" class="col-sm-2 col-form-label">String</label>
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="string"
+                name="string"
+                placeholder="String"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <!-- start of integer -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxInteger"/>
+              <label for="integer" class="col-sm-2 col-form-label"
+                >Integer</label
+              >
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="integer"
+                name="integer"
+                autocomplete="off"
+                placeholder="Integer"
+              />
+            </div>
+          </div>
+          <!-- start of float -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxFloat"/>
+              <label for="float" class="col-sm-2 col-form-label">Float</label>
+            </div>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                id="float"
+                name="float"
+                autocomplete="off"
+                placeholder="Float"
+              />
+            </div>
+          </div>
+          <!-- start of date -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxDate" />
+              <label for="date" class="col-sm-2 col-form-label">Date</label>
+            </div>
+            <div class="col-sm-4">
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                name="startdate"
+                autocomplete="off"
+                placeholder="Start Date"
+              />
+              <h6 class="form-text">
+                to
+              </h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <input
+                type="date"
+                class="end-date form-control"
+                id="date"
+                name="enddate"
+                autocomplete="off"
+                placeholder="End Date"
+              />
+            </div>
+          </div>
+
+          <!-- start of bolean -->
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="checkbox" name="checkboxBoolean"/>
+              <label for="float" class="col-sm-2 col-form-label">Boolean</label>
+            </div>
+            <div class="col-sm-10">
+              <select name="bool" class="custom-select mr-sm-2 bg-dark" id="bolean">
+                <option  selected><p class="op-selected">Choose...</p></option>
+                <option  name="true" value="true"><p class="op-selected">True</p></option>
+                <option  name="false" value="false"><p class="op-selected">False</p></option>
+              </select>
+            </div>
+          </div>
+
+          <!-- end of container -->
+        </div>
+        <button type="submit" name="search" value="clicked" class="btn-input btn btn-info">Submit</button>
+      </form>
+    </section>
+
+    <section id="show-tables">
+     
+      <form action="/" method="POST">
+      <div class="edit-tables table-lg container">
+        <table class="table table-striped table-dark">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">String</th>
+              <th scope="col">Integer</th>
+              <th scope="col">Float</th>
+              <th scope="col">Date</th>
+              <th scope="col">Boolean</th>
+              <th scope="col">Activation</th>
+            </tr>
+          </thead>
+          <tbody>
+          <%  rows.forEach(row=>{ %>
+               <% let {bread_id,string,intData,floatType,tanggal,bool}= row  %>
+                <tr>
+                  <th scope="row"><%= bread_id %></th>
+                  <td><%= string %></td>
+                  <td><%= intData %></td>
+                  <td><%= floatType %></td>
+                  <td><%= tanggal %></td>
+                  <td><%= bool %></td>
+                  <td>
+                   
+                    <a href="edit/<%=bread_id%>" class="btn-table-edit btn btn-success btn-sm">Edit</a>
+                   
+                    <button
+                      class="btn-table-delete btn btn-danger btn-sm"
+                      type="submit"
+                      name="delete"
+                      value=<%=bread_id%>
+                      
+                    >Delete
+                    
+                    </button>
+                 
+                  </td>
+                </tr>
+          <%  }) %>
+           
+           
+          </tbody>
+        </table> 
+      </div>
+    </form>
+    </section>
+
+    <section id="paginations">
+      <form action="/" method="GET">
+      <div class="container">
+        <nav aria-label="Page navigation ">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link bg-dark" href="#">Previous</a>
+            </li>
+            <% for(let index=1; index<= totalPage;index++){ %>
+            <li class="page-item">
+
+        <button type="submit" name="page" value="<%= index %>" class="page-link bg-dark"><%= index %></button>
+
+              <!-- <a class="page-link bg-dark" href="#"><%= index %></a> -->
+            </li>
+          <% } %>
+            <li class="page-item">
+              <a class="page-link bg-dark" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </form>
+      <form action="/" method="POST">
+      <!-- <button type="submit" name="add" value="clicked" class="btn-input btn btn-info">Add</button> -->
+      <a href="add/" class="btn-input btn btn-info">add</a>
+    </form>
+    </section>
+
+  
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    
+  
+<%- include('footer'); -%>
+
+
+
