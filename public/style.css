@@ -1,7 +1,7 @@
 .navbar-brand {
     font-family: 'Dancing Script', cursive;
     font-size: 2.5rem;
-    
+
     margin-left: 50px;
 }
 
@@ -16,11 +16,13 @@ ul.navbar-nav {
 body {
     background-color: #45515c;
     color: white;
-    
+
 }
-.readonly::placeholder{
-    color:white
+
+.readonly::placeholder {
+    color: white
 }
+
 h2 {
     margin-left: 126px;
 
@@ -36,6 +38,9 @@ h6 {
     margin-top: 30px;
 }
 
+::placeholder {
+    color: rgba(255, 255, 255, .3);
+}
 
 input[type='checkbox'] {
     -webkit-font-smoothing: antialiased;
@@ -68,6 +73,9 @@ input[type='checkbox']:after {
     background: #343a40;
 }
 
+input {
+    color: white;
+}
 
 input[type='checkbox']:checked:after {
     background: #343a40;
@@ -93,16 +101,18 @@ input[type="date"] {
     background-color: #343a40;
     border: none;
     color: rgba(255, 255, 255, .3);
+   
 
 }
 
 input[type="date"]:focus {
     background-color: #343a40;
-    color: white;
-    border: none;
 
 }
 
+input[type=date]:invalid::-webkit-datetime-edit {
+    color: rgba(255, 255, 255, .3)
+}
 
 .custom-select {
     color: rgba(255, 255, 255, .3);
@@ -110,7 +120,8 @@ input[type="date"]:focus {
     background: #343a40 url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right .75rem center/8px 10px !important;
 
 }
-.page-item.active .page-link{
+
+.page-item.active .page-link {
     border-color: white;
 }
 
@@ -118,6 +129,7 @@ input[type="date"]:focus {
 .page-item.disabled .page-link {
     border-color: rgba(255, 255, 255, .3);
 }
+
 .custom-select:focus {
     color: white;
     border: none;
@@ -159,11 +171,12 @@ input[type="date"]:focus {
     border-radius: 10px 10px 10px 10px;
 }
 
-.btn-table-delete{
+.btn-table-delete {
     width: 50%;
     margin-left: 10px;
 }
-.btn-table-edit{
+
+.btn-table-edit {
     width: 30%;
 }
 
@@ -173,7 +186,8 @@ input[type="date"]:focus {
     color: white;
     font-size: 1rem;
 }
-.a-edit:hover{
+
+.a-edit:hover {
     color: white;
     font-size: 1rem;
     text-decoration: none;

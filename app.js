@@ -6,6 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database(path.join(__dirname, "bread.db"))
 const app = express()
+
 app.use("/", express.static(path.join(__dirname, "public")))
 app.set('views', path.join(__dirname, "views"))
 app.set('view engine', 'ejs')
@@ -14,25 +15,15 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-let nextCondition=""
 const condition = []
 const port = 4000
 
-
-
-
-
-
-app.get("/", (req, res) => {
-    
-   
+app.get("/", (req, res) => {   
     const limit=5
     if (req.query.search === "clicked" ||req.query.pageBrowse) {
-        let currentPage= req.query.pageBrowse || 1
-        console.log(req.query)
+        let currentPage= req.query.pageBrowse || 1   
         let page ="pageBrowse"
-       
-        console.log("Browse fitur work")
+
         if (req.query.checkboxId === "on" && req.query.id.length !== 0) condition.push(`bread_id = ${Number(req.query.id)}`)
         if (req.query.checkboxString === "on" && req.query.string.length !== 0) condition.push(`string = "${req.query.string}"`)
         if (req.query.checkboxInteger === "on" && req.query.integer.length !== 0) condition.push(`intData = ${Number(req.query.integer)}`)
@@ -70,7 +61,6 @@ app.get("/", (req, res) => {
     } else {
         let currentPage= req.query.page || 1
         let page ="page"
-        console.log(req.query)
         db.serialize(function () {
             let sql = `SELECT COUNT(*) as total FROM bread;`
 
@@ -116,7 +106,7 @@ app.post("/", (req, res) => {
                         throw err
                     }
                     else {
-                        console.log("Data has been succesfully deleted from database")
+        
                         res.redirect("/")
                     }
 
