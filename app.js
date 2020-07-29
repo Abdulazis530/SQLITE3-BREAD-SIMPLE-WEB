@@ -24,9 +24,9 @@ const port = 4000
 
 
 app.get("/", (req, res) => {
-    let page= req.query.page || 1
+    let currentPage= req.query.page || 1
     console.log(req.query.page)
-    console.log(page)
+   
     const limit=5
     if (req.query.search === "clicked") {
         const condition = []
@@ -64,14 +64,14 @@ app.get("/", (req, res) => {
                 if (err) reject(err)
                 if (data) {
 
-                    let query = `SELECT * FROM bread LIMIT ${limit} OFFSET ${(page*limit)-limit};` 
+                    let query = `SELECT * FROM bread LIMIT ${limit} OFFSET ${(currentPage*limit)-limit};` 
                     db.all(query, (err, rows) => {
 
                         if (err) throw err
                         if (rows) {
-                            console.log(p)
-                            let totalPage= data.total/limit
-                            res.render('index', { rows,totalPage})
+                            
+                            let totalPage= Math.ceil(data.total/limit)
+                            res.render('index', { rows,totalPage,currentPage})
                         } else {
                             console.log("tidak ada hasil")
                         }

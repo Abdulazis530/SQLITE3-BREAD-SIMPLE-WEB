@@ -209,20 +209,41 @@
       <div class="container">
         <nav aria-label="Page navigation ">
           <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link bg-dark" href="#">Previous</a>
+          <% if(currentPage==1) { %>
+            <li class="page-item  disabled">
+              <button type="submit" name="page" value="<%= Number(currentPage)-1 %>" class="page-link bg-dark">Previous</button>
             </li>
+            <% }else{ %>
+              <li class="page-item">
+              
+              <button type="submit" name="page" value="<%= Number(currentPage)-1 %>" class="page-link bg-dark">Previous</button>
+              </li>
+            <%}%>
             <% for(let index=1; index<= totalPage;index++){ %>
-            <li class="page-item">
-
-        <button type="submit" name="page" value="<%= index %>" class="page-link bg-dark"><%= index %></button>
+           
+            <%  if(currentPage == index){ %>
+              <li class="page-item active">
+                <button type="submit" name="page" value="<%= index %>" class="page-link bg-dark"><%= index %></button>
+              <% } else { %>
+                <li class="page-item">
+                  <button type="submit" name="page" value="<%= index %>" class="page-link bg-dark"><%= index %></button>
+             <% } %>
+       
 
               <!-- <a class="page-link bg-dark" href="#"><%= index %></a> -->
             </li>
           <% } %>
-            <li class="page-item">
-              <a class="page-link bg-dark" href="#">Next</a>
+         <% if(currentPage == totalPage){ %>
+            <li class="page-item  disabled">
+              <button type="submit" name="page" value="<%= Number(currentPage)+1 %>" class="page-link bg-dark">Next</button>
+              
             </li>
+            <% } else { %>
+              <li class="page-item">
+              <button type="submit" name="page" value="<%= Number(currentPage)+1 %>" class="page-link bg-dark">Next</button>
+
+              </li>
+            <% } %>
           </ul>
         </nav>
       </div>
