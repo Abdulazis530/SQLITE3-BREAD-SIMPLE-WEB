@@ -14,8 +14,8 @@ app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-const browseData = []
-
+let nextCondition=""
+const condition = []
 const port = 4000
 
 
@@ -24,12 +24,14 @@ const port = 4000
 
 
 app.get("/", (req, res) => {
-    let currentPage= req.query.page || 1
-    console.log(req.query.page)
+    
    
     const limit=5
-    if (req.query.search === "clicked") {
-        const condition = []
+    if (req.query.search === "clicked" ||req.query.pageBrowse) {
+        let currentPage= req.query.pageBrowse || 1
+        console.log(req.query)
+        let page ="pageBrowse"
+       
         console.log("Browse fitur work")
         if (req.query.checkboxId === "on" && req.query.id.length !== 0) condition.push(`bread_id = ${Number(req.query.id)}`)
         if (req.query.checkboxString === "on" && req.query.string.length !== 0) condition.push(`string = "${req.query.string}"`)
@@ -39,23 +41,36 @@ app.get("/", (req, res) => {
         if (req.query.checkboxBoolean === "on" && req.query.bool !== "Choose...") condition.push(`bool = "${req.query.bool}"`)
 
         const conditions = condition.join(" OR ")
-
-
+       
         db.serialize(function () {
-            let sql = `SELECT * FROM bread WHERE ${conditions};`
-
-            db.all(sql, (err, rows) => {
+            let sql = `SELECT COUNT(*) as total  FROM bread WHERE ${conditions};`
+            
+            db.get(sql, (err, data) => {
 
                 if (err) throw err
-                if (rows) {
+                if (data) {
+                    let query = `SELECT * FROM bread WHERE ${conditions} LIMIT ${limit} OFFSET ${(currentPage*limit)-limit};` 
+                    db.all(query, (err, rows) => {
 
-                    res.render('index', { rows })
-                } else {
-                    console.log("tidak ada hasil")
-                }
+                        if (err) throw err
+                        if (rows) {
+                         
+                           
+                            let totalPage= Math.ceil(Number(data.total/limit))
+                       
+                            
+                            res.render('index', { rows,totalPage,currentPage,nameOfPage:page})
+                        } else {
+                            console.log("tidak ada hasil")
+                        }
+                    })
+                } 
             })
         })
     } else {
+        let currentPage= req.query.page || 1
+        let page ="page"
+        console.log(req.query)
         db.serialize(function () {
             let sql = `SELECT COUNT(*) as total FROM bread;`
 
@@ -71,7 +86,7 @@ app.get("/", (req, res) => {
                         if (rows) {
                             
                             let totalPage= Math.ceil(data.total/limit)
-                            res.render('index', { rows,totalPage,currentPage})
+                            res.render('index', { rows,totalPage,currentPage,nameOfPage:page})
                         } else {
                             console.log("tidak ada hasil")
                         }
