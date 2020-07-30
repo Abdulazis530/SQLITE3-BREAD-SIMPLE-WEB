@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const condition = []
-const port = 4000
+const port = 3000
 
 app.get("/", (req, res) => {   
     const limit=5
@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
         let page ="pageBrowse"
 
         if (req.query.checkboxId === "on" && req.query.id.length !== 0) condition.push(`bread_id = ${Number(req.query.id)}`)
-        if (req.query.checkboxString === "on" && req.query.string.length !== 0) condition.push(`string = "${req.query.string}"`)
+        if (req.query.checkboxString === "on" && req.query.string.length !== 0) condition.push(`string LIKE "${req.query.string}"`)
         if (req.query.checkboxInteger === "on" && req.query.integer.length !== 0) condition.push(`intData = ${Number(req.query.integer)}`)
         if (req.query.checkboxFloat === "on" && req.query.float.length !== 0) condition.push(`floatType = ${Number(req.query.float)}`)
         if (req.query.checkboxDate === "on" && req.query.startdate.length !== 0 && req.query.enddate !== 0) condition.push(`(tanggal BETWEEN "${req.query.startdate}" AND "${req.query.enddate}")`)
